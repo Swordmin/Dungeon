@@ -9,17 +9,14 @@ public class Room : MonoBehaviour
     [SerializeField] private GameObject _door;
     [SerializeField] private GameObject _room;
 
+    [SerializeField] private Transform _parent;
+
     [SerializeField] private bool _isClear;
 
     private void OnEnable()
     {
         Init();
         _enemy.SetRoom(this);
-    }
-
-    private void Start()
-    {
-        CreateRoom();
     }
 
     public Enemy GetEnemy() => _enemy;
@@ -42,7 +39,7 @@ public class Room : MonoBehaviour
 
     private void CreateRoom() 
     {
-        Instantiate(_room, new Vector3(transform.position.x, transform.position.y, transform.position.z + 4),Quaternion.identity);
+        Instantiate(_room, new Vector3(transform.position.x, transform.position.y, transform.position.z + 8),Quaternion.identity, _parent);
     }
 
 }
