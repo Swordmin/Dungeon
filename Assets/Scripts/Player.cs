@@ -9,8 +9,18 @@ public class Player : MonoBehaviour
     [SerializeField] private float _defence, _maxDefence;
     [SerializeField] private float _agility, _force;
 
+    [SerializeField] private bool _isCanMove;
+
     [SerializeField] private Weapon _weapon;
     [SerializeField] private Room _room;
+
+    [SerializeField] private List<Item> _items = new List<Item>();
+
+    private void Update()
+    {
+        if (_isCanMove)
+            transform.Translate(new Vector3(0, 0, 4 * Time.deltaTime));
+    }
 
     public void Heal(float value) 
     {
@@ -43,7 +53,9 @@ public class Player : MonoBehaviour
     {
         if(other.gameObject.TryGetComponent(out Room room)) 
         {
+            Debug.Log("ss");
             _room = room;
+            _isCanMove = false;
         }
     }
 
@@ -54,6 +66,7 @@ public class Player : MonoBehaviour
         if (_room.isClear()) 
         {
             _room.OpenDoor();
+            _isCanMove = true;
         }
     }
 }
