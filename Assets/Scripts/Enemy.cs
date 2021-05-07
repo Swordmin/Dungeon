@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
     private void Die() 
     {
         _room.Clear();
-        GetComponent<MeshRenderer>().enabled = false;
+        gameObject.SetActive(false);
 
     }
 

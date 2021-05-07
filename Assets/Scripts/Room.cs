@@ -6,7 +6,7 @@ public class Room : MonoBehaviour
 {
 
     [SerializeField] private Enemy _enemy;
-    [SerializeField] private GameObject _enemyPref;
+    [SerializeField] private GameObject[] _enemyPref;
     [SerializeField] private GameObject _door;
     [SerializeField] private GameObject _room;
 
@@ -37,8 +37,10 @@ public class Room : MonoBehaviour
 
     private void Init() 
     {
+        int idModel = Random.Range(0,_enemyPref.Length);
+
         Enemy enemy = new Enemy(10,5);
-        GameObject enemyCreate = Instantiate(_enemyPref, _spawnEnemy.position, Quaternion.identity, _spawnEnemy);
+        GameObject enemyCreate = Instantiate(_enemyPref[idModel], _spawnEnemy.position, _enemyPref[idModel].transform.rotation, _spawnEnemy);
         _enemy = enemyCreate.GetComponent<Enemy>();
         _enemy.SetRoom(this);
         _enemy.SetEnemy(enemy);

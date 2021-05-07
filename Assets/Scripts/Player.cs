@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _agility, _force;
 
     [SerializeField] private bool _isCanMove;
+    [SerializeField] private bool _isCanRoomCreate = true;
 
     [SerializeField] private Weapon _weapon;
     [SerializeField] private Room _room;
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour
         {
             _room = room;
             _isCanMove = false;
+            _isCanRoomCreate = true;
         }
     }
 
@@ -62,10 +64,11 @@ public class Player : MonoBehaviour
 
     public void Go()
     {
-        if (_room.isClear()) 
+        if (_room.isClear() && _isCanRoomCreate) 
         {
             _room.OpenDoor();
             _isCanMove = true;
+            _isCanRoomCreate = false;
         }
     }
 }
