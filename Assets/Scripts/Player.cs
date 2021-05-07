@@ -29,9 +29,9 @@ public class Player : MonoBehaviour
             _health = _maxHealth;
     }
 
-    public void Damage() 
+    public void TakeDamage(float damage) 
     {
-        
+        _health -= damage;
     }
     public void SetWeapon(Weapon weapon) 
     {
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         if (_room.GetEnemy().isLive() && _weapon.isAtack)
         {
             _weapon.Atack();
-            _room.GetEnemy().Damage(GetDamage());
+            _room.GetEnemy().TakeDamage(GetDamage());
         }
         
     }
@@ -53,7 +53,6 @@ public class Player : MonoBehaviour
     {
         if(other.gameObject.TryGetComponent(out Room room)) 
         {
-            Debug.Log("ss");
             _room = room;
             _isCanMove = false;
         }
